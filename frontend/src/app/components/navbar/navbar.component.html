@@ -1,5 +1,18 @@
-<nav class="navbar navbar-light bg-light justify-content-between bg-dark ">
-  <a class="navbar-brand  text-danger">Navbar</a>
-  <a class="navbar-brand  text-danger" href="#">Login</a>
+<div>
 
+  <nav class="navbar navbar-light bg-light justify-content-between" style="background-image: linear-gradient(to right, #434343 0%, black 100%);background-image: linear-gradient(to right, #ff512f, #f09819);background-image: linear-gradient(to right, #5a3f37, #2c7744);">
+    <a style="padding:10px" class="navbar-brand  text-warning" routerLink="/blogs">myProject</a>
+
+
+    <div *ngIf="!jarwis.checkLogedIn(); else userEx">
+    <a class="navbar-brand  text-warning" routerLink="/login">Login</a>
+    <a class="navbar-brand  text-warning" routerLink="/signup">Signup</a>
+  </div>
+  <ng-template #userEx>
+    <div>
+      <a class="navbar-brand  text-warning" routerLink="/profile">Profile</a>
+      <a class="navbar-brand  text-warning" (click)="logout()">Logout</a>
+    </div>
+    </ng-template>
 </nav>
+</div>

@@ -1,0 +1,55 @@
+
+<div class="container">
+  <button
+    class="btn btn-outline-warning mt-2"
+    style="position: absolute"
+    routerLink="/myBlogs"
+  >
+    My Blogs
+  </button>
+  <h1 class="text-center" style="font-family:fantasy; ">Public Blogs</h1>
+  <div class="d-flex">
+    <hr />
+    <div class="overflow-auto" style="height: 580px">
+      <div class="card m-2" *ngFor="let b of blogList">
+        <div
+          class="row g-0"
+          style="background-image: linear-gradient(to right, #ebc7c7 0%, rgb(9, 55, 73) 100%);"
+        >
+          <div class="col-md-4"  routerLink="/blogDetails/{{ b['id'] }}">
+            <img src="{{ b['image'] }}" class="img-fluid rounded-start" />
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <b>
+                <h5  routerLink="/blogDetails/{{ b['id'] }}" class="card-title">{{ b["title"] }}</h5>
+              </b>
+              <p  routerLink="/blogDetails/{{ b['id'] }}" class="card-text">
+                {{ b["description"] }}
+              </p>
+              <b>
+                <p class="card-text" style="position: absolute; bottom: 0">
+                  <small class="text-muted">{{ b["bloger"]["name"] }}</small
+                    >&nbsp;&nbsp;
+                    <i class="far {{ (b['liked'] == 0) ? 'fa-heart heart-icon' : 'fas fa-heart' }}" style="color: red;" (click)="likeMe(b['id'])"></i>
+                    &nbsp;&nbsp;
+                    <small>Liked by {{ (b['AllLikes'] > 1) ?b['AllLikes']+' Users'  : b['AllLikes']+' User  ' }}</small>
+                    &nbsp;&nbsp;
+                    <i class="far fa-comment fa-icon"></i>
+                </p>
+                <p
+                  class="card-text"
+                  style="position: absolute; bottom: 0; margin-left: 0"
+                >
+                  <small class="text-muted">{{
+                    b["formattedLastUpdated"]
+                  }}</small>
+                </p>
+              </b>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

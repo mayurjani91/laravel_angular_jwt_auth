@@ -1,0 +1,100 @@
+<div class="container">
+  <div style="position: absolute;">
+
+    <button class="btn btn-outline-warning mt-2" style="position: relative;" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="clearFrom()">Add Blogs</button>
+    <button class="btn btn-outline-warning mt-2" style="position: relative; margin-left: 10px;" routerLink="/blogs">Public Blogs</button>
+  </div>
+
+  <h1 class="text-center"style="font-family:fantasy; ">My Blogs</h1>
+<div class="d-flex">
+  <hr>
+  <!-- <div *ngIf="success">
+    <li class="alert alert-danger"  *ngFor="let er of success  | keyvalue">
+      {{er.value}}
+    </li>
+  </div> -->
+  <div class="overflow-auto" style="height: 580px">
+    <div class="card m-2" *ngFor="let b of blogList">
+        <div  class="row g-0" style="background-image: linear-gradient(to right, #ebc7c7 0%, rgb(9, 55, 73) 100%);" >
+            <div routerLink="/blogDetails/{{b['id']}}" class="col-md-4">
+                <img src="{{b['image']}}" class="img-fluid rounded-start" />
+            </div>
+            <div class="col-md-8">
+              <button class="btn btn-sm btn-primary mt-2 float-end" (click)="blogEdit(b['id'])" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-edit"></i></button>
+              <button class="btn btn-sm btn-danger mt-2 float-end" (click)="blogDelete(b['id'])" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                <div class="card-body">
+                  <b>
+                    <h5  routerLink="/blogDetails/{{b['id']}}" class="card-title">{{b['title']}}</h5>
+                  </b>
+                    <p  routerLink="/blogDetails/{{b['id']}}" class="card-text">
+                      {{b['description']}}
+                    </p>
+                    <b>
+
+                      <p class="card-text" style="position : absolute;  bottom:0">
+                        <small class="text-muted">{{b['bloger']['name']}}</small>
+                      </p>
+                      <p class="card-text" style="position: absolute; bottom: 0">
+                        <small class="text-muted">{{ b["bloger"]["name"] }}</small
+                          >&nbsp;&nbsp;
+                          <i class="far {{ (b['liked'] == 0) ? 'fa-heart heart-icon' : 'fas fa-heart' }}" style="color: red;" (click)="likeMe(b['id'])"></i>
+                          &nbsp;&nbsp;
+                        <small>Liked by {{ (b['AllLikes'] > 1) ?b['AllLikes']+' Users'  : b['AllLikes']+' User  ' }}</small>
+                      </p>
+                    </b>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">{{Title}}</h1>
+        <button id="auto_trigger" type="button" class="btn-close" data-bs-dismiss="modal"  aria-label="Close"></button>
+      </div>
+      <form #blogForm=ngForm (ngSubmit)= "(this.Title === 'Add Blogs')?onSubmit():onUpdate()">
+      <div class="modal-body">
+        <div class="mb-3">
+          <div *ngIf="error">
+            <li class="alert alert-danger"  *ngFor="let er of error  | keyvalue">
+              {{er.value}}
+            </li>
+          </div>
+          <input type="hidden" name="id" [(ngModel)]="form.id">
+          <label for="blogtitle1" class="form-label">Blog title</label>
+          <input type="email" class="form-control" id="blogtitle1" name="title" placeholder="Blog Title" [(ngModel)]="form.title">
+        </div>
+        <div class="mb-3">
+          <label for="blogDescription1" class="form-label">Blog description</label>
+          <textarea class="form-control" id="blogDescription1" name="description" rows="3" [(ngModel)]="form.description"></textarea>
+        </div>
+        <div class="mb-3">
+          <label for="image1" class="form-label">Image Upload</label>
+          <input type="file" #file class="form-control" name="image" id="image1" [(ngModel)]="form.image" accept='image/*' (change)="onFileSelected($event)"  >
+        </div>
+        <div class="mb-3">
+          <img [src]="imgURL" height="200" width="100%" *ngIf="imgURL">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <div *ngIf="this.Title === 'Add Blogs'">
+          <button type="submit" class="btn btn-primary" [disabled]="!blogForm.valid" >Save changes</button>
+        </div>
+        <div *ngIf="this.Title === 'Edit Blogs'">
+          <button type="submit" class="btn btn-primary" [disabled]="!blogForm.valid" >Save changes</button>
+        </div>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>

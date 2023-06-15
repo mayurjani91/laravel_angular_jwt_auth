@@ -1,1 +1,43 @@
-<p>response-reset works!</p>
+<div class="mt-4 col-8 offset-2">
+  <div class="card">
+    <div class="card-header">
+      <div class="card-body">
+        <h5>Reset your password</h5>
+        <hr>
+        <form #passwordResetForm=ngForm (ngSubmit)= "onSubmit()">
+          <div *ngIf="error">
+            <li class="alert alert-danger"  *ngFor="let er of error  | keyvalue">
+              {{er.value}}
+            </li>
+          </div>
+          <div *ngIf="message">
+            <li class="alert alert-success">
+              {{message}}
+            </li>
+          </div>
+
+          <div class="form-group row">
+            <label for="inputpassword3" class="col-sm-2 col-form-label" >New Password</label>
+            <div class="col-sm-10">
+              <input type="hidden" name="reset_token" value="{{form.reset_token}}">
+              <input type="password" name="password" class="form-control" id="inputpassword3" [(ngModel)]="form.password" placeholder="new password" required="">
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="inputpassword_confirmationl3" class="col-sm-2 col-form-label" >Confirm password</label>
+            <div class="col-sm-10">
+              <input type="password_confirmation" name="password_confirmation" class="form-control" id="inputpassword_confirmation3" [(ngModel)]="form.password_confirmation" placeholder="confirm password" required="">
+            </div>
+          </div>
+
+          <div class="form-group row mt-4">
+            <div class="col-sm-12">
+              <button type="submit" class="btn btn-primary" [disabled]="!passwordResetForm.valid">Change password</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

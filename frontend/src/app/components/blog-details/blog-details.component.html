@@ -1,0 +1,39 @@
+
+<!-- <h1>{{blogDetail}}</h1> -->
+<div class="container">
+  <h1 class="text-center">Details</h1>
+<div>
+  <hr>
+  <div class="overflow-auto" style="height: 580px;">
+    <div class="card m-2" *ngFor="let b of blogDetail">
+        <div class="row" style="background-color: lightgrey; padding: 10px;">
+            <div class="col-md-12">
+              <b>
+                <h3 class="card-title text text-center">{{b['title']}}</h3>
+              </b>
+
+                <img src="{{b['image']}}" class="img-fluid rounded-start" style="width: 100%;" />
+            </div>
+            <div class="col-md-12">
+                <div class="card-body">
+
+                    <p class="card-text">
+                      {{b['description']}}
+                    </p>
+                    <b>
+
+                      <p class="card-text" style="position : absolute;  bottom:0">
+                        <small class="text-muted">{{b['bloger']['name']}}</small>
+                      </p>
+                      <p class="card-text" style="position : absolute;  bottom:0; margin-left: 0;">
+                        <small class="text-muted">{{b['formattedLastUpdated']}}</small>
+                      </p>
+                    </b>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>
+
+</div>

@@ -8,6 +8,14 @@ import { SignupComponent } from './components/signup/signup.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { RequestResetComponent } from './components/password/request-reset/request-reset.component';
 import { ResponseResetComponent } from './components/password/response-reset/response-reset.component';
+import { AppRoutingModule } from './app-routing.module';
+import { FormsModule } from '@angular/forms';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { BlogsComponent } from './components/blogs/blogs.component';
+import { SpinnerComponent } from './components/spinner/spinner.component';
+import { LoadingInterceptor } from './loading.interceptor';
+import { MyblogsComponent } from './components/myblogs/myblogs.component';
+import { BlogDetailsComponent } from './components/blog-details/blog-details.component';
 
 @NgModule({
   declarations: [
@@ -17,12 +25,25 @@ import { ResponseResetComponent } from './components/password/response-reset/res
     SignupComponent,
     ProfileComponent,
     RequestResetComponent,
-    ResponseResetComponent
+    ResponseResetComponent,
+    BlogsComponent,
+    SpinnerComponent,
+    MyblogsComponent,
+    BlogDetailsComponent,
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoadingInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
